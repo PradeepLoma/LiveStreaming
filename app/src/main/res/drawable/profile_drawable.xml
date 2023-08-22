@@ -1,0 +1,7 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:drawable="@drawable/baseline_person"
+        android:width="30dp"
+        android:height="30dp">
+    </item>
+</layer-list>

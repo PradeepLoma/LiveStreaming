@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <layer-list android:opacity="transparent">
+            <item android:width="30dp" android:end="30dp" android:gravity="left">
+                <shape>
+                    <solid android:color="@color/white">
+
+                    </solid>
+                </shape>
+            </item>
+            <item android:width="30dp" android:gravity="left" android:start="30dp">
+                <shape>
+                    <solid android:color="@color/white">
+
+                    </solid>
+                </shape>
+            </item>
+            <item android:width="30dp" android:end="20dp">
+                <bitmap android:gravity="left" android:src="@drawable/round_monetization_on_black_18" />
+            </item>
+        </layer-list>
+    </item>
+</selector>
