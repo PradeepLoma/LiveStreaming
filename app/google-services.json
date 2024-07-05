@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "563700355428",
+    "project_id": "livestreaming-c0efd",
+    "storage_bucket": "livestreaming-c0efd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:563700355428:android:2b878635e39687ce79aa71",
+        "android_client_info": {
+          "package_name": "com.loma.streamingtest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "563700355428-nn4seagi3sor74j8rkn8d43ad3ine1nk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCf8g6WsYcHKoRmvI6jtZDhfRopj6X0Twk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "563700355428-nn4seagi3sor74j8rkn8d43ad3ine1nk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
