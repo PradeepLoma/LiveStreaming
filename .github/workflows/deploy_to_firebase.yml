@@ -23,11 +23,8 @@ jobs:
           distribution: 'adopt'
           java-version: '17'
 
-      - name : Build with Gradle
+      - name: Build with Gradle
         run: ./gradlew build
-
-      - name: Make gradlew executable
-        run: chmod +x ./gradlew
 
       - name: Execute Gradle command - assembleDebug
         run: ./gradlew assembleDebug
