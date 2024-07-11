@@ -52,8 +52,7 @@ public class MainLiveStream extends AppCompatActivity {
                     Manifest.permission.CAMERA
             };
 
-    private boolean checkSelfPermission()
-    {
+    private boolean checkSelfPermission() {
         if (ContextCompat.checkSelfPermission(this, REQUESTED_PERMISSIONS[0]) !=  PackageManager.PERMISSION_GRANTED ||
                 ContextCompat.checkSelfPermission(this, REQUESTED_PERMISSIONS[1]) !=  PackageManager.PERMISSION_GRANTED)
         {

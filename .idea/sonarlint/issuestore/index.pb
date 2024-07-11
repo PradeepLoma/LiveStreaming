@@ -9,3 +9,15 @@ A
 gradle.properties,2\a\2afbb999f001938c88fa43fc2ef52abf0f8213e4
 D
 app/build.gradle.kts,d\2\d2a4383452aad84a18429a5844d31330a012a9e6
+l
+<app/src/main/java/com/loma/streamingtest/MainLiveStream.java,b\c\bc1c5d07fac77bbeeef3fac76211b3acd3c19f6b
+@
+local.properties,0\7\0712df971a99ac4d2fccb8e0fb19f377f3374cca
+m
+=app/src/main/java/com/loma/streamingtest/extrafile/AppDetails,c\8\c8289e2d809e0d2362adc2db4311090bc070c513
+R
+".github/workflows/deployToFirebase,8\1\81e569eb841fa3ac6fc2910e1f4dd88b214842ee
+T
+$.github/workflows/deploy_to_firebase,3\1\31f24c7c7fb807b14b0033e7175eb2fae3b999a0
+X
+(.github/workflows/deploy_to_firebase.yml,5\f\5ff6f754f31f0a00d0e743d7b0aff4dee4d54ff7

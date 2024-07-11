@@ -1,0 +1,42 @@
+name: Firebase App Distribution
+
+on :
+  workflow_dispatch :
+    inputs :
+      release_notes :
+        type: string
+        required: true
+        default: 'Manual Debug Release'
+        description: 'Release Notes'
+
+jobs:
+  build:
+    name: Building and Distributing App
+    runs-on: windows-latest
+    steps:
+      - name : Checkout
+        uses: actions/checkout@v4.1.0
+
+      - name: Setup Java JDK
+        uses: actions/setup-java@v3.13.0
+        with:
+          distribution: 'adopt'
+          java-version: '17'
+
+      - name : Build with Gradle
+        run: ./gradlew build
+
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+
+      - name: Execute Gradle command - assembleDebug
+        run: ./gradlew assembleDebug
+
+      - name: Upload Artifact to Firebase App Distribution
+        uses: wzieba/Firebase-Distribution-Github-Action@v1
+        with:
+            appId: ${{ secrets.FIREBASE_APP_ID }}
+            serviceCredentialsFileContent: ${{ secrets.CREDENTIAL_FILE_CONTENT }}
+            groups: android_internal
+            file: app/build/outputs/apk/debug/app-debug.apk
+            releaseNotes: ${{ inputs.release_notes }}
