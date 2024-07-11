@@ -6,7 +6,7 @@ on :
       release_notes :
         type: string
         required: true
-        default: 'Manual Debug Release'
+        default: 'Testing Check'
         description: 'Change in run-on- replaced it with ubuntu-latest from windows-latest'
 
 
