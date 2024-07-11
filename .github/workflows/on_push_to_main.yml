@@ -1,10 +1,14 @@
 name: AndroidSteamingCICD
 
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+on :
+  workflow_dispatch :
+    inputs :
+      release_notes :
+        type: string
+        required: true
+        default: 'Manual Debug Release'
+        description: 'Change in run-on- replaced it with ubuntu-latest from windows-latest'
+
 
 jobs:
   build:

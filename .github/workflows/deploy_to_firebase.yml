@@ -27,7 +27,9 @@ jobs:
         run: ./gradlew build
 
       - name: Execute Gradle command - assembleDebug
-        run: ./gradlew assembleDebug
+        run: |
+          chmod +x./gradlew
+          ./gradlew assembleDebug
 
       - name : Upload a Build Artifact
         uses: wzieba/Firebase-Distribution-Github-Action@v1
