@@ -21,3 +21,5 @@ T
 $.github/workflows/deploy_to_firebase,3\1\31f24c7c7fb807b14b0033e7175eb2fae3b999a0
 X
 (.github/workflows/deploy_to_firebase.yml,5\f\5ff6f754f31f0a00d0e743d7b0aff4dee4d54ff7
+U
+%.github/workflows/on_push_to_main.yml,6\c\6cabc6d223af8531d6ecde07c7c4425aca1efd10

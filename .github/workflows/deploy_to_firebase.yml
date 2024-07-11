@@ -7,12 +7,12 @@ on :
         type: string
         required: true
         default: 'Manual Debug Release'
-        description: 'Release Notes'
+        description: 'Change in run-on- replaced it with ubuntu-latest from windows-latest'
 
 jobs:
   build:
     name: Building and Distributing App
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
       - name : Checkout
         uses: actions/checkout@v4.1.0
@@ -32,11 +32,11 @@ jobs:
       - name: Execute Gradle command - assembleDebug
         run: ./gradlew assembleDebug
 
-      - name: Upload Artifact to Firebase App Distribution
+      - name : Upload a Build Artifact
         uses: wzieba/Firebase-Distribution-Github-Action@v1
         with:
-            appId: ${{ secrets.FIREBASE_APP_ID }}
-            serviceCredentialsFileContent: ${{ secrets.CREDENTIAL_FILE_CONTENT }}
-            groups: android_internal
-            file: app/build/outputs/apk/debug/app-debug.apk
-            releaseNotes: ${{ inputs.release_notes }}
+          appId: ${{ secrets.FIREBASE_APP_ID }}
+          serviceCredentialsFileContent: ${{ secrets.CREDENTIAL_FILE_CONTENT }}
+          groups: android_internal
+          file: app/build/outputs/apk/debug/app-debug.apk
+          releaseNotes: ${{ inputs.release_notes }}
