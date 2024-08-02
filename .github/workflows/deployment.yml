@@ -1,17 +1,15 @@
-name: SitDistribution
-
 on:
   workflow_dispatch:
     inputs:
       environment:
         type: string
         required: true
-        default: 'SIT'
-        description: 'Environment to deploy to (Production, SIT, or Development)'
+        default: 'Testing'
+        description: 'Environment to deploy to (Production, Staging, or Testing)'
       release_notes:
         type: string
         required: true
-        default: 'Environment Testing'
+        default: 'Testing Check'
         description: 'Checking for Test Deployment for SIT-Testing-production'
 
 jobs:
@@ -28,42 +26,29 @@ jobs:
           java-version: '17'
 
       - name: Build with Gradle
-        run: |
-          chmod +x ./gradlew
-          ./gradlew build
+        run: ./gradlew build
 
-      - name: Execute Gradle command - assembleDebug
-        run: ./gradlew assembleDebug
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Streaming.apk
+          path: app/build/outputs/apk/debug/app-debug.apk
 
-      #Deployment to For Environment (https:/luomaStaging.com/browse/)
       - name: Deploy to Environment
         run: |
           if [ "$environment" == "Production" ]; then
-            echo "Using Production URL: https://luomaProduction.com/browse/"
             curl -X POST \
               https://luomaProduction.com/browse/ \
               -H 'Content-Type: application/octet-stream' \
               -T app/build/outputs/apk/debug/app-debug.apk
-          elif [ "$environment" == "Development" ]; then
-            echo "Using Staging URL: https://luomaStaging.com/browse/"
+          elif [ "$environment" == "Staging" ]; then
             curl -X POST \
               https://luomaStaging.com/browse/ \
               -H 'Content-Type: application/octet-stream' \
               -T app/build/outputs/apk/debug/app-debug.apk
-          elif [ "$environment" == "SIT" ]; then
-            echo "Using Testing URL: https://luomaStaging.com/browse/"
+          elif [ "$environment" == "Testing" ]; then
             curl -X POST \
               https://luomaStaging.com/browse/ \
               -H 'Content-Type: application/octet-stream' \
               -T app/build/outputs/apk/debug/app-debug.apk
           fi
-
-      #Deployment to Firebase
-      - name: Upload to Firebase App Distribution
-        uses: wzieba/Firebase-Distribution-Github-Action@v1
-        with:
-          appId: ${{ secrets.FIREBASE_APP_ID }}
-          serviceCredentialsFileContent: ${{ secrets.CREDENTIAL_FILE_CONTENT }}
-          groups: android_internal_testing
-          file: app/build/outputs/apk/debug/app-debug.apk
-          releaseNotes: ${{ inputs.release_notes }}

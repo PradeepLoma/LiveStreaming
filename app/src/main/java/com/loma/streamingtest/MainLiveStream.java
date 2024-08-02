@@ -1,18 +1,22 @@
 package com.loma.streamingtest;
 
+import static android.util.Log.println;
+
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.SurfaceView;
+import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import android.Manifest;
-import android.content.pm.PackageManager;
-import android.view.SurfaceView;
-import android.view.View;
-import android.widget.FrameLayout;
-import android.widget.Toast;
+
 import io.agora.rtc2.ChannelMediaOptions;
 import io.agora.rtc2.Constants;
 import io.agora.rtc2.IRtcEngineEventHandler;
@@ -44,7 +48,6 @@ public class MainLiveStream extends AppCompatActivity {
     private SwitchCompat audienceRole;
 
 
-
     private static final int PERMISSION_REQ_ID = 22;
     private static final String[] REQUESTED_PERMISSIONS =
             {
@@ -53,9 +56,8 @@ public class MainLiveStream extends AppCompatActivity {
             };
 
     private boolean checkSelfPermission() {
-        if (ContextCompat.checkSelfPermission(this, REQUESTED_PERMISSIONS[0]) !=  PackageManager.PERMISSION_GRANTED ||
-                ContextCompat.checkSelfPermission(this, REQUESTED_PERMISSIONS[1]) !=  PackageManager.PERMISSION_GRANTED)
-        {
+        if (ContextCompat.checkSelfPermission(this, REQUESTED_PERMISSIONS[0]) != PackageManager.PERMISSION_GRANTED ||
+                ContextCompat.checkSelfPermission(this, REQUESTED_PERMISSIONS[1]) != PackageManager.PERMISSION_GRANTED) {
             return false;
         }
         return true;
@@ -119,8 +121,9 @@ public class MainLiveStream extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Permissions was not granted", Toast.LENGTH_SHORT).show();
         }
     }
+
     public void NextActivity(View view) {
-       startActivity(new Intent(this, CommunityActivity.class));
+        startActivity(new Intent(this, CommunityActivity.class));
     }
 
     public void leaveChannel(View view) {
@@ -175,6 +178,7 @@ public class MainLiveStream extends AppCompatActivity {
         setupVideoSDKEngine();
 
     }
+
     void showMessage(String message) {
         runOnUiThread(() ->
                 Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show());
