@@ -1,21 +1,17 @@
-name: SitDistribution
+name: Firebase App Distribution
 
 on:
   workflow_dispatch:
     inputs:
-      environment:
-        type: string
-        required: true
-        default: 'SIT'
-        description: 'Environment to deploy to (Production, SIT, or Development)'
       release_notes:
         type: string
         required: true
-        default: 'Environment Testing'
-        description: 'Checking for Test Deployment for SIT-Testing-production'
+        default: 'Testing Check'
+        description: 'Change in run-on- replaced it with ubuntu-latest from windows-latest'
 
 jobs:
   build:
+    name: Building and Distributing App
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -35,35 +31,11 @@ jobs:
       - name: Execute Gradle command - assembleDebug
         run: ./gradlew assembleDebug
 
-      #Deployment to For Environment (https:/luomaStaging.com/browse/)
-      - name: Deploy to Environment
-        run: |
-          if [ "$environment" == "Production" ]; then
-            echo "Using Production URL: https://luomaProduction.com/browse/"
-            curl -X POST \
-              https://luomaProduction.com/browse/ \
-              -H 'Content-Type: application/octet-stream' \
-              -T app/build/outputs/apk/debug/app-debug.apk
-          elif [ "$environment" == "Development" ]; then
-            echo "Using Staging URL: https://luomaStaging.com/browse/"
-            curl -X POST \
-              https://luomaStaging.com/browse/ \
-              -H 'Content-Type: application/octet-stream' \
-              -T app/build/outputs/apk/debug/app-debug.apk
-          elif [ "$environment" == "SIT" ]; then
-            echo "Using Testing URL: https://luomaStaging.com/browse/"
-            curl -X POST \
-              https://luomaStaging.com/browse/ \
-              -H 'Content-Type: application/octet-stream' \
-              -T app/build/outputs/apk/debug/app-debug.apk
-          fi
-
-      #Deployment to Firebase
-      - name: Upload to Firebase App Distribution
+      - name: Upload a Build Artifact
         uses: wzieba/Firebase-Distribution-Github-Action@v1
         with:
           appId: ${{ secrets.FIREBASE_APP_ID }}
           serviceCredentialsFileContent: ${{ secrets.CREDENTIAL_FILE_CONTENT }}
-          groups: android_internal_testing
+          groups: android_internal
           file: app/build/outputs/apk/debug/app-debug.apk
           releaseNotes: ${{ inputs.release_notes }}
